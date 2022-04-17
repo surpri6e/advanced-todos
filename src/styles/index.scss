@@ -1,0 +1,8 @@
+@import '~bootstrap/scss/bootstrap';
+
+
+@include media-breakpoint-up(sm) {
+    .about-body {
+        flex-direction: column;
+    }
+}
