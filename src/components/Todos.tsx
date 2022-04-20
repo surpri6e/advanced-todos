@@ -1,12 +1,27 @@
 import React from 'react'
+import { FirebaseContext } from '../context/firebase/firebaseContext';
+import Loader from './Loader';
+import TodosHelper from './TodosHelper';
 
-interface TodosProps {
+const Todos = () => {
 
-}
+  const {firebaseState, fetchTodos} = React.useContext(FirebaseContext);
 
-const Todos: React.FC<TodosProps> = ({}) => {
+  React.useEffect(()=> {
+    fetchTodos()
+    // eslint-disable-next-line
+  }, [])
+
+//   if(!firebaseState.todos.length) {
+//     return <div>Вы не созади пока что не одной заметки</div>
+// }
+
   return (
-    <div>Todos</div>
+        !firebaseState.loading
+        ?
+        <TodosHelper todos={firebaseState.todos}/>
+        :
+        <Loader/>
   )
 }
 

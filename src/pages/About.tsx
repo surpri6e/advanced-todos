@@ -8,7 +8,7 @@ const About = () => {
 
         <div className='w-50 d-flex justify-content-start'>
           <div className="card w-75" aria-hidden="true">
-            <img src="bylldog.png" className="card-img-top" alt="..."/>
+            <div className='card-img-top bg-secondary h-50'></div>
             <div className="card-body">
               <h5 className="card-title placeholder-glow">
                 <span className="placeholder col-6 bg-success"></span>
@@ -20,14 +20,15 @@ const About = () => {
                 <span className="placeholder col-6 bg-primary"></span>
                 <span className="placeholder col-8 bg-primary"></span>
               </p>
-              <a href="#"  className="btn btn-primary disabled placeholder col-6"></a>
+              {/* eslint-disable-next-line */}
+              <a href="/"  className="btn btn-primary disabled placeholder col-6"></a>
             </div>
           </div>
         </div>
 
         <div className='w-50 d-flex justify-content-end'>
           <div className="card w-75 fixed-right" aria-hidden="true">
-            <img src="bylldog.png" className="card-img-top" alt="..."/>
+            <div className='card-img-top bg-primary h-50'></div>
             <div className="card-body">
               <h5 className="card-title placeholder-glow">
                 <span className="placeholder col-6 bg-success"></span>
@@ -39,6 +40,7 @@ const About = () => {
                 <span className="placeholder col-6 bg-success."></span>
                 <span className="placeholder col-8 bg-success."></span>
               </p>
+              {/* eslint-disable-next-line */}
               <a href="#"  className="btn btn-primary disabled placeholder col-6"></a>
             </div>
           </div>
