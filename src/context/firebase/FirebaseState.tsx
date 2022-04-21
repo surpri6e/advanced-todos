@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react'
+import { INumberly } from '../../components/Form';
 import { ITodo } from '../../types/ITodo';
+import { __keyChecker } from '../../utils/keyGen';
 import { FirebaseContext } from './firebaseContext';
 import { firebaseReducer } from './firebaseReducer';
 
@@ -9,7 +11,7 @@ interface FirebaseStateProps {
   children: React.ReactNode | React.ReactChild;
 }
 
-const URL: string = process.env.REACT_APP_DB_URL!;
+const URL: string = `${process.env.REACT_APP_DB_URL!}/${__keyChecker()}`;
 
 const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
 
@@ -28,19 +30,21 @@ const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
     dispatch({type: 'FETCH_NOTES', payload: {...state, todos: todos}})
   }
 
-  const addTodo = async (val: string) => {
+  const addTodo = async (val: string, add: string, numberly: INumberly) => {
     const todo: ITodo = {
       id: Date.now(),
       completed: false,
-      additional: 'New todo',
-      potency: 3,
-      time: 25,
+      additional: add,
+      potency: numberly.potency,
+      time: numberly.time,
       title: val,
     }
 
     try {
       const result = await axios.post(`${URL}/todos.json`, todo);
-      dispatch({type: 'ADD_TODO', payload: {...state, todos: [todo]}})
+      const key: string = result.data.name;
+      todo.key = key
+      dispatch({type: 'ADD_TODO', payload: {...state, todos: [todo]}, })
       console.log(result.data);
     } catch (error) {
       throw new Error('gg')
@@ -49,8 +53,8 @@ const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
     
   }
 
-  const removeTodo = async (id: number) => {
-    await axios.delete(`${URL}/notes/${id}.json`);
+  const removeTodo = async (key: string, id: number) => {
+    await axios.delete(`${URL}/todos/${key}.json`);
     dispatch({type: 'DELETE_NOTE', payload: {...state}, id})
   }
 

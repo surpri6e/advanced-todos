@@ -5,7 +5,7 @@ import TodosHelper from './TodosHelper';
 
 const Todos = () => {
 
-  const {firebaseState, fetchTodos} = React.useContext(FirebaseContext);
+  const {firebaseState, fetchTodos, removeTodo} = React.useContext(FirebaseContext);
 
   React.useEffect(()=> {
     fetchTodos()
@@ -19,7 +19,7 @@ const Todos = () => {
   return (
         !firebaseState.loading
         ?
-        <TodosHelper todos={firebaseState.todos}/>
+        <TodosHelper todos={firebaseState.todos} remove={removeTodo}/>
         :
         <Loader/>
   )

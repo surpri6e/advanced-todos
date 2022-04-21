@@ -3,12 +3,15 @@ import Form from '../components/Form';
 import Todos from '../components/Todos';
 import { FirebaseContext } from '../context/firebase/firebaseContext';
 import FirebaseState from '../context/firebase/FirebaseState';
+import { __keyChecker } from '../utils/keyGen';
 
 const TodosPage = () => {
 
   //! ВОТ ИЗ-ЗА ЧЕГО ВОЗНИКАЕТ ОШИБКА
   // const {firebaseState} = React.useContext(FirebaseContext)
   // console.log(firebaseState)
+
+  __keyChecker();
 
   return (
     <div className='container'>
