@@ -21,7 +21,7 @@ const TodosHelper: React.FC<TodosHelperProps> = ({todos, remove}) => {
             <div className='d-flex justify-content-end mb-2'>
               <span className="badge bg-primary rounded-pill">{todo.potency}</span>
             </div>
-            <button type="button" className="btn btn-danger" onClick={() => remove(todo.key ? todo.key : '', todo.id)}>&times;</button>
+            <button type="button" className="btn btn-danger" onClick={() => remove(todo.key!, todo.id)}>&times;</button>
           </div>
         </li>
         ))

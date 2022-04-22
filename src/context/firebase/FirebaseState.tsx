@@ -25,7 +25,7 @@ const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
     showLoader();
     const result = await axios.get(`${URL}/todos.json`);
     console.log('fetchNotes', result.data);
-    const todos: ITodo[] = Object.keys(result.data).map(key => ({...result.data[key]}))
+    const todos: ITodo[] = Object.keys(result.data).map(key => ({...result.data[key], key}))
     console.log(todos)
     dispatch({type: 'FETCH_NOTES', payload: {...state, todos: todos}})
   }
@@ -55,6 +55,7 @@ const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
 
   const removeTodo = async (key: string, id: number) => {
     await axios.delete(`${URL}/todos/${key}.json`);
+    console.log(key, id)
     dispatch({type: 'DELETE_NOTE', payload: {...state}, id})
   }
 
