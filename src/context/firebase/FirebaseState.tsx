@@ -2,7 +2,6 @@ import axios from 'axios';
 import React from 'react'
 import { INumberly } from '../../components/Form';
 import { ITodo } from '../../types/ITodo';
-import { __keyChecker } from '../../utils/keyGen';
 import { FirebaseContext } from './firebaseContext';
 import { firebaseReducer } from './firebaseReducer';
 
@@ -11,9 +10,11 @@ interface FirebaseStateProps {
   children: React.ReactNode | React.ReactChild;
 }
 
-const URL: string = `${process.env.REACT_APP_DB_URL!}/${__keyChecker()}`;
+const email: string = sessionStorage.length ? JSON.parse(sessionStorage.getItem('data')!).email.split('').map((s: string) => s === '.' ? '__' : s).join('') : '';
+const URL: string = `${process.env.REACT_APP_DB_URL!}/${email}`;
 
 const FirebaseState: React.FC<FirebaseStateProps> = ({children}) => {
+
 
   const [state, dispatch] = React.useReducer(firebaseReducer, {todos: [], loading: false})
 
